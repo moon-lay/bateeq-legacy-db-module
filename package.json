@@ -1,10 +1,14 @@
 {
-  "name": "sql-node-test",
+  "name": "bateeq-legacy-db-module",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tr4nquility/bateeq-legacy-db-module.git"
   },
   "author": "",
   "license": "MIT",
