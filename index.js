@@ -1,3 +1,3 @@
 module.exports = {
-    SqlConnection = require('./sqlConnect')
+    SqlConnection : require('./sqlConnect')
 };
