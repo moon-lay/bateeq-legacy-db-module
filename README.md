@@ -2,6 +2,7 @@
 Module to retrieve data from Bateeq legacy database.
 
 # Usage example :
+```javascript
 var db = require('bateeq-legacy-db-module');
 var db_config = {
     user: '<username>',  
@@ -16,3 +17,4 @@ var db_config = {
 }
 var conn = new db.SqlConnection(db_config);
 conn.query('SELECT TOP 1 * FROM wfdocument order by createdate desc').then(res => console.log(res)).catch(err => console.log(err));
+```
