@@ -1,7 +1,7 @@
 var sql = require('mssql');
 
 function SqlConnect(config) {
-    var configuration = {
+    configuration = {
         user: config.user,
         password: config.password,
         server: config.server,
@@ -11,10 +11,13 @@ function SqlConnect(config) {
             encrypt: config.options.encrypt
         }
     };
-    connection = new sql.Connection(configuration);
 }
 
-SqlConnect.prototype.query = function getQueryResult(sqlString) {
+SqlConnect.prototype.getConnection = function getConnection() {
+    return new sql.Connection(configuration);
+}
+
+SqlConnect.prototype.query = function getQueryResult(sqlString, connection) {
     return new Promise(function (fulfill, reject) {
         if (connection) {
             // try to connect using specified connection
@@ -22,11 +25,16 @@ SqlConnect.prototype.query = function getQueryResult(sqlString) {
                 // create a new request
                 var request = new sql.Request(connection);
                 request.query(sqlString, function (err, recordset) {
-                    if (err) reject({
-                        code: err.code,
-                        message: err.message
-                    });
-                    else fulfill({ query: sqlString, result: recordset });
+                    if (err)
+                        reject({
+                            code: err.code,
+                            message: err.message
+                        });
+                    else
+                        fulfill({
+                            query: sqlString,
+                            result: recordset
+                        });
                 });
             }).catch(err => reject({
                 code: err.code,
@@ -36,7 +44,6 @@ SqlConnect.prototype.query = function getQueryResult(sqlString) {
         else
             reject('SQL Connection is not available.');
     })
+
 }
 module.exports = SqlConnect;
-
-
