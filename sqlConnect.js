@@ -13,11 +13,8 @@ function SqlConnect(config) {
     };
 }
 
-SqlConnect.prototype.getConnection = function getConnection() {
-    return new sql.Connection(configuration);
-}
-
-SqlConnect.prototype.query = function getQueryResult(sqlString, connection) {
+SqlConnect.prototype.query = function getQueryResult(sqlString) {
+    var connection = new sql.Connection(configuration);
     return new Promise(function (fulfill, reject) {
         if (connection) {
             // try to connect using specified connection
@@ -44,6 +41,6 @@ SqlConnect.prototype.query = function getQueryResult(sqlString, connection) {
         else
             reject('SQL Connection is not available.');
     })
-
 }
+
 module.exports = SqlConnect;
