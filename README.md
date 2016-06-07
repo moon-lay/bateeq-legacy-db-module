@@ -12,9 +12,9 @@ var db_config = {
     database: '<sql_db_name>',
     debug: false,
     options: {
-        encrypt: false // Use this if you're on Windows Azure
+        encrypt: false // Set this to <true> if you're on Windows Azure
     }
 }
 var conn = new db.SqlConnection(db_config);
-conn.query('SELECT TOP 1 * FROM wfdocument order by createdate desc').then(res => console.log(res)).catch(err => console.log(err));
+conn.query('SELECT TOP 1 * FROM <your_table_name>').then(result => console.log(result)).catch(error => console.log(error));
 ```
