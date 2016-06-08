@@ -1,10 +1,10 @@
-# bateeq-legacy-db-module
-Module to retrieve data from Bateeq legacy database.
+# sql-driver
+Module to retrieve data from SQL databases (on-premise or Azure).
 
 # Usage example :
 Normal select queries :
 ```javascript
-var db = require('bateeq-legacy-db-module');
+var db = require('sql-driver');
 var db_config = {
     user: '<username>',  
     password: '<password>',
@@ -21,7 +21,7 @@ conn.query('SELECT TOP 1 * FROM <your_table_name>').then(result => console.log(r
 ```
 Executing stored procedure :
 ```javascript
-var db = require('bateeq-legacy-db-module');
+var db = require('sql-driver');
 var db_config = {
     user: '<username>',  
     password: '<password>',
