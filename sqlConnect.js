@@ -1,7 +1,7 @@
 var sql = require('mssql');
 
 function SqlConnect(config) {
-    configuration = {
+    this.configuration = {
         user: config.user,
         password: config.password,
         server: config.server,
@@ -14,7 +14,7 @@ function SqlConnect(config) {
 }
 
 SqlConnect.prototype.query = function getQueryResult(sqlString) {
-    var connection = new sql.Connection(configuration);
+    var connection = new sql.Connection(this.configuration);
     return new Promise(function (fulfill, reject) {
         if (connection) {
             // try to connect using specified connection
@@ -28,10 +28,7 @@ SqlConnect.prototype.query = function getQueryResult(sqlString) {
                             message: err.message
                         });
                     else
-                        fulfill({
-                            query: sqlString,
-                            result: recordset
-                        });
+                        fulfill(recordset);
                 });
             }).catch(err => reject({
                 code: err.code,
@@ -44,7 +41,7 @@ SqlConnect.prototype.query = function getQueryResult(sqlString) {
 }
 
 SqlConnect.prototype.execSP = function getResult(options) {
-    var connection = new sql.Connection(configuration);
+    var connection = new sql.Connection(this.configuration);
     return new Promise(function (fulfill, reject) {
         if (connection) {
             connection.connect().then(function () {
